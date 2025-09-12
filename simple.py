@@ -8,9 +8,11 @@ print(thislist)
 
 
 
+
 sora = ["apple", "banana",3,9.0872, "cherry"]
 print(sora)
-
+sora.update("keli")
+print(sora)
 #sora.sort()#1
 #
 
