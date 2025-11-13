@@ -3,21 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Read dataset
 df = pd.read_csv(r"C:\Users\hp\Downloads\Python_Lab\member.csv", sep='\t')
 
-# Display basic info
+
 print("Dataset Columns:", df.columns.tolist())
 print(df.head())
 
-# Create BooksBorrowed column if missing
 if 'BooksBorrowed' not in df.columns:
     df['BooksBorrowed'] = np.random.randint(1, 20, size=len(df))
     print("\n[INFO] Added synthetic 'BooksBorrowed' column for analysis.\n")
 
-# -----------------------------
-# Step 1: Define age group bins
-# -----------------------------
+
 def categorize_age(age):
     if 16 <= age <= 19:
         return "Teens (16-19)"
@@ -34,9 +30,7 @@ def categorize_age(age):
 
 df['AgeGroup'] = df['Age'].apply(categorize_age)
 
-# -----------------------------
-# Step 2: Membership type borrowing
-# -----------------------------
+
 membership_borrow = df.groupby('Membership_Type')['BooksBorrowed'].sum().sort_values(ascending=False)
 print("\nBooks Borrowed by Membership Type:\n", membership_borrow)
 
@@ -47,9 +41,6 @@ plt.ylabel("Total Books Borrowed")
 plt.xlabel("Membership Type")
 plt.show()
 
-# -----------------------------
-# Step 3: Borrowing frequency by Age Group
-# -----------------------------
 age_borrow = df.groupby('AgeGroup')['BooksBorrowed'].mean().sort_values(ascending=False)
 print("\nAverage Borrowing by Age Group:\n", age_borrow)
 
@@ -60,9 +51,7 @@ plt.ylabel("Average Books Borrowed")
 plt.xlabel("Age Group")
 plt.show()
 
-# -----------------------------
-# Step 4: Seasonal Borrowing Trends
-# -----------------------------
+
 if 'BorrowDate' in df.columns:
     df['BorrowDate'] = pd.to_datetime(df['BorrowDate'], errors='coerce')
     df['Month'] = df['BorrowDate'].dt.month_name()
@@ -78,9 +67,7 @@ if 'BorrowDate' in df.columns:
     plt.xticks(rotation=45)
     plt.show()
 
-# -----------------------------
-# Step 5: Most Active and Inactive Members
-# -----------------------------
+
 member_activity = df.groupby('Member_ID')['BooksBorrowed'].sum().sort_values(ascending=False)
 most_active = member_activity.head(5)
 least_active = member_activity.tail(5)
