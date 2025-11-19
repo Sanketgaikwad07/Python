@@ -4,6 +4,7 @@
 def letter_combinations(digits):
     if not digits:
         return []
+        
 
     phone = {
         '2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl',
