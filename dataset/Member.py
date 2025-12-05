@@ -6,6 +6,7 @@ import seaborn as sns
 df = pd.read_csv(r"C:\Users\hp\Downloads\Python_Lab\member.csv", sep='\t')
 
 
+
 print("Dataset Columns:", df.columns.tolist())
 print(df.head())
 
