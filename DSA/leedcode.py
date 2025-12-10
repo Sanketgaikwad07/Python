@@ -6,6 +6,7 @@ def lengthOfLongestSubstring(s: str) -> int:
     maxLength = 0
     start = 0
     
+    
 
     for end in range(len(s)):
         # If the current character is a duplicate within the current window
